@@ -1,4 +1,4 @@
-package util.types
+package types
 
 object LogType extends Enumeration {
   type LogType = Value

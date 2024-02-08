@@ -1,7 +1,8 @@
-package util
+package libs
 
-import util.types.LogType
-import util.types.LogType._
+import types.LogType
+import types.LogType.LogType
+import vars.DefaultVar
 
 import java.util.Calendar
 import java.text.SimpleDateFormat
@@ -14,8 +15,6 @@ object LogLib {
   private val warnOn: Boolean = true
   private val warnTag: LogType = LogType.Warn
 
-  private val dateFormatMask: String = "yy/MM/dd hh:mm:ss"
-
   def showInfo(message: String): Unit = {
     printValue(message, infoTag, infoOn)
   }
@@ -26,7 +25,7 @@ object LogLib {
 
   private def printValue(message: String, tag: LogType, on: Boolean) : Unit = {
     if (on) {
-      val dateFormat = new SimpleDateFormat(dateFormatMask)
+      val dateFormat = new SimpleDateFormat(DefaultVar.dateFormatMask)
       val timeOfNow = Calendar.getInstance().getTime
 
       println(s"${dateFormat.format(timeOfNow)} ${tag.toString} $message")

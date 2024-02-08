@@ -1,16 +1,14 @@
-package demo
+package demos
 
-import util.LoadFileLib._
-import util.StartLib._
+import libs.LoadFileLib._
+import libs.StartLib._
+import vars.DefaultVar
 
-object DemoExecution {
+object LoadFileDemo {
 
   def show(): Unit = {
 
-    val appName: String = "rprjTest.com"
-    val cors: Int = 4
-
-    val spark = buildSparkLocalSession(appName, cors)
+    val spark = buildSparkLocalSession(DefaultVar.appName, DefaultVar.coreNumbers)
     import spark.implicits._
 
     val demo01FilePath: String = "data/countries-table.csv"
@@ -24,6 +22,6 @@ object DemoExecution {
       printSchemaOn = demo01PrintSchemaOn
     )
 
-    df.show(10)
+    df.show(DefaultVar.showLines)
   }
 }

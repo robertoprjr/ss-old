@@ -1,18 +1,13 @@
-package util
+package libs
 
 import org.apache.spark.sql.SparkSession
-import util.LogLib.showInfo
+import libs.LogLib.showInfo
+import vars.InitialVar
 
 object StartLib {
 
-  private val commonSparkConfigVars: Map[String, String] = Map(
-    "spark.sql.shuffle.partitions" -> "30",
-    "spark.shuffle.compress" -> "true",
-    "spark.eventLog.enabled" -> "false"
-  )
-
   private def getSparkConfigVarsForLocalSession: Map[String, String] = {
-    commonSparkConfigVars
+    InitialVar.commonSparkConfigVars
   }
 
   def buildSparkLocalSession(appName: String,
