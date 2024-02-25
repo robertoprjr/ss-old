@@ -2,7 +2,7 @@ package libs
 
 import types.LogType
 import types.LogType.LogType
-import vars.DefaultVar
+import vars.DefaultVars
 
 import java.util.Calendar
 import java.text.SimpleDateFormat
@@ -25,7 +25,7 @@ object LogLib {
 
   private def printValue(message: String, tag: LogType, on: Boolean) : Unit = {
     if (on) {
-      val dateFormat = new SimpleDateFormat(DefaultVar.dateFormatMask)
+      val dateFormat = new SimpleDateFormat(DefaultVars.dateFormatMask)
       val timeOfNow = Calendar.getInstance().getTime
 
       println(s"${dateFormat.format(timeOfNow)} ${tag.toString} $message")

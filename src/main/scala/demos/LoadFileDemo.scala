@@ -2,26 +2,33 @@ package demos
 
 import libs.LoadFileLib._
 import libs.StartLib._
-import vars.DefaultVar
+import types.LoadFileType
+import vars.{DefaultVars, LoadFileVars}
 
 object LoadFileDemo {
 
   def show(): Unit = {
 
-    val spark = buildSparkLocalSession(DefaultVar.appName, DefaultVar.coreNumbers)
+    val spark = buildSparkLocalSession(DefaultVars.appName, DefaultVars.coreNumbers)
     import spark.implicits._
 
-    val demo01FilePath: String = "data/countries-table.csv"
-    val demo01HeaderOn: Boolean = true
-    val demo01PrintSchemaOn: Boolean = true
+    // Load Countries
+    val countryPopulationLoadFileVars = LoadFileVars.getVars(LoadFileType.CountryPopulation)
 
-    val df = loadCSVFileToDF(
+    val dfCountryPopulation = loadCSVFileToDF(
       spark,
-      filePath = demo01FilePath,
-      headerOn = demo01HeaderOn,
-      printSchemaOn = demo01PrintSchemaOn
-    )
+      countryPopulationLoadFileVars)
 
-    df.show(DefaultVar.showLines)
+    dfCountryPopulation.show(DefaultVars.showLines)
+
+    // Load Cities
+    val cityPopulationLoadFileVars = LoadFileVars.getVars(LoadFileType.CityPopulation)
+
+    val dfCityPopulation = loadCSVFileToDF(
+      spark,
+      cityPopulationLoadFileVars)
+
+    dfCityPopulation.show(DefaultVars.showLines)
+
   }
 }

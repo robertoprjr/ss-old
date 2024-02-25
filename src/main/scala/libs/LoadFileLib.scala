@@ -2,19 +2,30 @@ package libs
 
 import libs.LogLib._
 import org.apache.spark.sql.{DataFrame, SparkSession}
+import vars.LoadFileVars
 
 object LoadFileLib {
 
   def loadCSVFileToDF(spark: SparkSession,
+                      vars: LoadFileVars): DataFrame = {
+
+    loadCSVFileToDF(spark,
+      filePath = vars.filePath,
+      optionsMap = vars.options,
+      nickName = vars.nickName,
+      printSchema = vars.printSchema)
+  }
+
+  def loadCSVFileToDF(spark: SparkSession,
                       filePath: String,
-                      headerOn: Boolean = false,
-                      printSchemaOn: Boolean = false): DataFrame = {
+                      optionsMap: Map[String, String],
+                      nickName: String,
+                      printSchema: Boolean = false) : DataFrame = {
 
-    val headerOption = "header"
-    val df = spark.read.option(headerOption, headerOn).csv(filePath)
+    val df = spark.read.options(optionsMap).csv(filePath)
 
-    showInfo(s"File $filePath loaded...")
-    if (printSchemaOn) df.printSchema()
+    showInfo(s"File (${nickName} : ${filePath}) loaded...")
+    if (printSchema) df.printSchema()
 
     df
   }

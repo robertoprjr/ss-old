@@ -2,12 +2,12 @@ package libs
 
 import org.apache.spark.sql.SparkSession
 import libs.LogLib.showInfo
-import vars.InitialVar
+import vars.DefaultVars
 
 object StartLib {
 
   private def getSparkConfigVarsForLocalSession: Map[String, String] = {
-    InitialVar.commonSparkConfigVars
+    DefaultVars.commonSparkConfigVars
   }
 
   def buildSparkLocalSession(appName: String,
