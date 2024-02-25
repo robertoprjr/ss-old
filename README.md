@@ -1,1 +1,1 @@
-# scala-spark-util
+# ss-util

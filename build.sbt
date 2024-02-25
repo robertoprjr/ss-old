@@ -8,5 +8,5 @@ libraryDependencies ++= Seq(
 
 lazy val root = (project in file("."))
   .settings(
-    name := "scala-spark-util"
+    name := "ss-util"
   )
